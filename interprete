@@ -1,0 +1,48 @@
+class Interpret(object):
+    def __init__(self):
+        self.__prompt=''
+        self.__d={}
+
+    def getPrompt(self):
+        return self.__prompt
+
+    def getDic(self):
+        return self.__d
+
+    def sort(self):
+        l=sorted(self.getDic)
+
+    def setPrompt(self,s):
+        self.__prompt=s
+
+    def afegeixOrdre(self,ordre,nomFuncio):
+        if ordre not in self.__d:
+            self.__d[ordre]=nomFuncio
+        else:
+            print("Ordre '", ordre, "' ja estava assignada")
+
+
+    def run(self):
+        print(self.getPrompt())
+        dada=input()
+        while dada!='surt':
+            dades=dada.split()
+            ordre=dades[0]
+            parametre=dades[1]
+            if ordre in self.__d:
+                self.__d[ordre](parametre)
+            print(self.getPrompt())
+            dada=input()
+
+def c1(l):
+    print('Executa ordre 1')
+
+def c2(l):
+    print('Executa ordre 2')
+
+if __name__=='__main__':
+    i=Interpret()
+    i.setPrompt("@@")
+    i.afegeixOrdre("llista", c1)
+    i.afegeixOrdre("bloqueja", c2)
+    i.run()
